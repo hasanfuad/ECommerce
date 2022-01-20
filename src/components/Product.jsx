@@ -33,7 +33,7 @@ const Container = styled.div`
 
   &:hover ${Info} {
     opacity: 1;
-    transition: all 1.5s ease;
+    transition: all 0.5s ease;
     cursor: pointer;
   }
 `;
