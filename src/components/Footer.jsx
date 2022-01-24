@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  margin-left: 80px;
+  margin-left: 18rem;
 `;
 const Left = styled.div`
   flex: 1;
@@ -23,6 +23,7 @@ const Left = styled.div`
 const Logo = styled.h1``;
 const Desc = styled.p`
   margin: 20px 0;
+  letter-spacing: 1px;
 `;
 const SocialContainer = styled.div`
   display: flex;
