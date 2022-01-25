@@ -1,6 +1,7 @@
 // import { Button } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   flex: 1;
@@ -12,6 +13,8 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  ${mobile({ marginTop: "10px", height: "40vh" })};
 `;
 const Title = styled.h1`
   font-weight: 600;

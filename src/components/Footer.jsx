@@ -8,10 +8,15 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
   margin-left: 18rem;
+  ${mobile({
+    flexDirection: "column",
+    marginLeft: "0px",
+  })};
 `;
 const Left = styled.div`
   flex: 1;
@@ -44,6 +49,8 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+
+  ${mobile({ display: "none" })};
 `;
 
 const Title = styled.h3`
@@ -65,11 +72,15 @@ const ListItem = styled.li`
 
 const Right = styled.div`
   flex: 1;
+  ${mobile({
+    backgroundColor: "#fcf3f3",
+  })}
 `;
 const ContactItem = styled.div`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  ${mobile({ textAlign: "right", fontSize: "12px" })};
 `;
 const Payment = styled.img`
   height: 50px;
