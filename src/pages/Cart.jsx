@@ -1,4 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -77,6 +78,7 @@ const ProductDetail = styled.div`
 const Image = styled.img`
   width: 100px;
   object-fit: cover;
+  margin-top: 10px;
 `;
 
 const Detail = styled.div`
@@ -98,6 +100,9 @@ const ProductColor = styled.div`
 `;
 
 const ProductSize = styled.span``;
+const ProductQty = styled.span`
+  font-size: 14px;
+`;
 
 const PriceDetail = styled.div`
   flex: 1;
@@ -171,6 +176,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
   return (
     <Container>
       <Navbar />
@@ -188,67 +194,48 @@ const Cart = () => {
 
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://images-eu.ssl-images-amazon.com/images/I/61tVLb2OfrL._AC._SR360,460.jpg" />
-                <Detail>
-                  <ProductName>
-                    <b>Product:</b>
-                    Men's Exclusive Shirt
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>987456214
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>37.5
-                  </ProductSize>
-                </Detail>
-              </ProductDetail>
+            {cart.products.map((product) => (
+              <Product keys={product._id}>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Detail>
+                    <ProductName>
+                      <b>Product: </b>
+                      {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID: </b>
+                      {product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size: </b>
+                      {product.size}
+                    </ProductSize>
+                    <ProductQty>
+                      <b>Qty: </b>
+                      {product.qty}
+                    </ProductQty>
+                  </Detail>
+                </ProductDetail>
 
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.amount}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>$ {product.price * product.qty}</ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://images-eu.ssl-images-amazon.com/images/I/61tVLb2OfrL._AC._SR360,460.jpg" />
-                <Detail>
-                  <ProductName>
-                    <b>Product:</b>
-                    Men's Exclusive Shirt
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b>987456214
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b>37.5
-                  </ProductSize>
-                </Detail>
-              </ProductDetail>
-
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -260,7 +247,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <Button>Checkout Now</Button>
           </Summary>
