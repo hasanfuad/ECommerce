@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
+import Success from "./pages/Success";
 
 const App = () => {
   const user = false;
@@ -30,6 +31,7 @@ const App = () => {
         ) : (
           <Route path="/register" element={<Register />}></Route>
         )}
+        <Route path="/success" element={<Success />} />
       </Routes>
     </Router>
   );
